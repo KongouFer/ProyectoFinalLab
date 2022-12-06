@@ -278,6 +278,8 @@ int main()
 	//Model cubo("resources/objects/cubo/cube02.obj");
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
 
+	Model Asador("resources/Casa/Asador/Asador.obj");
+
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
 	animacionPersonaje.initShaders(animShader.ID);
 
@@ -424,6 +426,11 @@ int main()
 		staticShader.setMat4("model", model);
 		casaVieja.Draw(staticShader);
 
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.75f, 5.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Asador.Draw(staticShader);
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Carro
 		// -------------------------------------------------------------------------------------------------------------------------
