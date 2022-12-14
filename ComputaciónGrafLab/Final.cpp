@@ -76,7 +76,9 @@ bool	circuito = false,
 		recorrido3 = false,
 		recorrido4 = false,
 		recorrido5 = false,
-		recorrido6 = false;
+		recorrido6 = false,
+		recorrido7 = false,
+		recorrido8 = false;
 
 //(4.475f, 0.0f, 41.48f)
 
@@ -237,7 +239,7 @@ void animate(void)
 			{
 				orienta = 0;
 				movAuto_x -= 0.2f;
-				if (movAuto_x < 0.6*5)
+				if (movAuto_x < 1.318*5)
 				{
 					recorrido5 = false;
 					recorrido6 = true;
@@ -248,13 +250,32 @@ void animate(void)
 			{
 				orienta = 270;
 				movAuto_z -= 0.2f;
-				if (movAuto_z < 41)
+				if (movAuto_z < 10.103*5) //Z = 8.2 Maya
 				{
 					recorrido6 = false;
+					recorrido7 = true;
+				}
+			}
+			if (recorrido7)
+			{
+				orienta = 0;
+				movAuto_x -= 0.2f;
+				if (movAuto_x < 0.6 * 5) //Z = 8.2 Maya
+				{
+					recorrido7 = false;
+					recorrido8 = true;
+				}
+			}
+			if (recorrido8)
+			{
+				orienta = 270;
+				movAuto_z -= 0.2f;
+				if (movAuto_z < 8.2 * 5) //Z = 8.2 Maya
+				{
+					recorrido8 = false;
 					recorrido1 = true;
 				}
 			}
-
 		}
 }
 
@@ -332,7 +353,7 @@ int main()
 	};
 
 	Skybox skybox = Skybox(faces);
-	SoundEngine->play2D("resources/Musica/ophelia.mp3", true);
+	SoundEngine->play2D("resources/Musica/daily_download_20160204_128.mp3", true);
 	// Shader configuration
 	// --------------------
 	skyboxShader.use();
@@ -359,7 +380,6 @@ int main()
 	//Casa - Prueba
 	Model Prueba("resources/Pruebas/Casa_1.obj");
 	Model Tren("resources/Casa/Adaptados/Tren/Tren.obj");
-
 
 
 
@@ -508,6 +528,7 @@ int main()
 		model = glm::scale(model, glm::vec3(5.0f));
 		staticShader.setMat4("model", model);
 		Prueba.Draw(staticShader);
+
 
 		//Tren
 		model = glm::mat4(1.0f);
