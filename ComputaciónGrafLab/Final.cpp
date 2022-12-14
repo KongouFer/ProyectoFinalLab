@@ -1,8 +1,8 @@
-﻿/*---------------------------------------------------------*/
-/* ----------------  Práctica                   -----------*/
-/*-----------------    2023-1   ---------------------------*/
-/*------------- Alumno:                     ---------------*/
-/*------------- No. Cuenta                  ---------------*/
+﻿/*----------------------------------------------------------------------------*/
+/* ------------Proyecto Final - Laboratorio de Computación Gráfica -----------*/
+/*------------- 2023-1 -------------------------------------------------------*/
+/*------------- Alumno: Fernández Quiroz Félix Fernando ----------------------*/
+/*------------- No. Cuenta: 315192205 ----------------------------------------*/
 #include <Windows.h>
 
 #include <glad/glad.h>
@@ -12,6 +12,10 @@
 #include <glm/gtc/matrix_transform.hpp>	//camera y model
 #include <glm/gtc/type_ptr.hpp>
 #include <time.h>
+#include <irrklang/irrKlang.h>
+using namespace irrklang;
+
+ISoundEngine* SoundEngine = createIrrKlangDevice();
 
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -63,14 +67,18 @@ glm::vec3 lightDirection(0.0f, -1.0f, -1.0f);
 // posiciones
 //float x = 0.0f;
 //float y = 0.0f;
-float	movAuto_x = 0.0f,
-		movAuto_z = 0.0f,
-		orienta = 0.0f;
-bool	animacion = false,
+float	movAuto_x = 0.6 *5,
+		movAuto_z = 41.0f,
+		orienta = 180.0f;
+bool	circuito = false,
 		recorrido1 = true,
 		recorrido2 = false,
 		recorrido3 = false,
-		recorrido4 = false;
+		recorrido4 = false,
+		recorrido5 = false,
+		recorrido6 = false;
+
+//(4.475f, 0.0f, 41.48f)
 
 
 //Keyframes (Manipulación y dibujo)
@@ -142,6 +150,8 @@ void interpolation(void)
 
 void animate(void)
 {
+
+	
 	if (play)
 	{
 		if (i_curr_steps >= i_max_steps) //end of animation between frames?
@@ -176,10 +186,76 @@ void animate(void)
 	}
 
 	//Vehículo
-	if (animacion)
-	{
-		movAuto_z += 3.0f;
-	}
+
+		if (circuito)
+		{
+			if (recorrido1)
+			{
+				orienta = 180;
+				movAuto_x += 0.2f;
+				if (movAuto_x > 18.335)
+				{
+					recorrido1 = false;
+					recorrido2 = true;
+				}
+			}
+			if (recorrido2)
+			{
+				orienta = 90;
+				movAuto_z += 0.2f;
+				if (movAuto_z > 8.847*5)
+				{
+					recorrido2 = false;
+					recorrido3 = true;
+
+				}
+			}
+
+			if (recorrido3)
+			{
+				orienta = 0;
+				movAuto_x -= 0.2f;
+				if (movAuto_x < 1.926*5)
+				{
+					recorrido3 = false;
+					recorrido4 = true;
+				}
+			}
+
+			if (recorrido4)
+			{
+				orienta = 90;
+				movAuto_z += 0.2f;
+				if (movAuto_z > 10.884*5)
+				{
+					recorrido4 = false;
+					recorrido5 = true;
+				}
+			}
+
+			if (recorrido5)
+			{
+				orienta = 0;
+				movAuto_x -= 0.2f;
+				if (movAuto_x < 0.6*5)
+				{
+					recorrido5 = false;
+					recorrido6 = true;
+				}
+			}
+
+			if (recorrido6)
+			{
+				orienta = 270;
+				movAuto_z -= 0.2f;
+				if (movAuto_z < 41)
+				{
+					recorrido6 = false;
+					recorrido1 = true;
+				}
+			}
+
+		}
 }
 
 void getResolution()
@@ -256,7 +332,7 @@ int main()
 	};
 
 	Skybox skybox = Skybox(faces);
-
+	SoundEngine->play2D("resources/Musica/ophelia.mp3", true);
 	// Shader configuration
 	// --------------------
 	skyboxShader.use();
@@ -278,11 +354,14 @@ int main()
 	//Model cubo("resources/objects/cubo/cube02.obj");
 	Model casaDoll("resources/objects/casa/DollHouse.obj");
 
-	Model Asador("resources/Casa/Asador/Asador.obj");
+	//Model Asador("resources/Casa/Asador/Asador.obj");
+	
+	//Casa - Prueba
+	Model Prueba("resources/Pruebas/Casa_1.obj");
+	Model Tren("resources/Casa/Adaptados/Tren/Tren.obj");
 
-	//Casa
-	Model Prueba("resources/Pruebas/Prueba1.obj");
-	Model Ventanas("resources/Pruebas/Prueba2.obj");
+
+
 
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
 	animacionPersonaje.initShaders(animShader.ID);
@@ -414,49 +493,31 @@ int main()
 		staticShader.setMat4("projection", projection);
 		staticShader.setMat4("view", view);
 
-		//model = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 0.0f, -10.0f));
-		//model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		//staticShader.setMat4("model", model);
-		//casaDoll.Draw(staticShader);
+		
 
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, -0.0623f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.2f));
 		staticShader.setMat4("model", model);
 		piso.Draw(staticShader);
 
+
+		//Fachada
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(5.0f));
 		staticShader.setMat4("model", model);
 		Prueba.Draw(staticShader);
 
+		//Tren
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
+		model = glm::translate(model, glm::vec3(movAuto_x, 0.0f, movAuto_z)); //multiplicado por 5 model = glm::translate(model, glm::vec3(0.895f, 0.0f, 8.296f));
 		model = glm::scale(model, glm::vec3(5.0f));
+		model = glm::rotate(model, glm::radians(orienta), glm::vec3(0.0f, 1.0f, 0.0));
 		staticShader.setMat4("model", model);
-		Ventanas.Draw(staticShader);
-
-		//glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
-		model = glm::scale(model, glm::vec3(5.0f));
-		staticShader.setMat4("model", model);
-		//staticShader.setVec3("aColor", glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-		Ventanas.Draw(staticShader);
-		glEnable(GL_BLEND);
-
-		//model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -70.0f));
-		//model = glm::scale(model, glm::vec3(5.0f));
-		//staticShader.setMat4("model", model);
-		//casaVieja.Draw(staticShader);
+		Tren.Draw(staticShader);
 
 
-		//model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.75f, 5.0f));
-		//model = glm::scale(model, glm::vec3(5.0f));
-		//staticShader.setMat4("model", model);
-		//Asador.Draw(staticShader);
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Carro
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -595,22 +656,22 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, (float)deltaTime);
 	//To Configure Model
-	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
-		posZ++;
-	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
-		posZ--;
-	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
-		posX--;
-	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
-		posX++;
-	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
-		rotRodIzq--;
-	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
-		rotRodIzq++;
-	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS)
-		giroMonito--;
-	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
-		giroMonito++;
+	//if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
+	//	posZ++;
+	//if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
+	//	posZ--;
+	//if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+	//	posX--;
+	//if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
+	//	posX++;
+	//if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
+	//	rotRodIzq--;
+	//if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
+	//	rotRodIzq++;
+	//if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS)
+	//	giroMonito--;
+	//if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
+	//	giroMonito++;
 	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
 		lightPosition.x++;
 	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
@@ -618,7 +679,7 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 
 	//Car animation
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-		animacion ^= true;
+		circuito ^= true;
 
 	//To play KeyFrame animation 
 	if (key == GLFW_KEY_P && action == GLFW_PRESS)
