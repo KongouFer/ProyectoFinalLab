@@ -67,7 +67,7 @@ glm::vec3 lightDirection(0.0f, -1.0f, -1.0f);
 // posiciones
 //float x = 0.0f;
 //float y = 0.0f;
-float	movAuto_x = 0.6 *5,
+float	movAuto_x = 0.6 * 5,
 		movAuto_z = 41.0f,
 		orienta = 180.0f;
 bool	circuito = false,
@@ -528,7 +528,7 @@ int main()
 		model = glm::scale(model, glm::vec3(5.0f));
 		staticShader.setMat4("model", model);
 		Prueba.Draw(staticShader);
-
+		//Baul
 
 		//Tren
 		model = glm::mat4(1.0f);
