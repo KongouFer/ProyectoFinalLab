@@ -100,6 +100,10 @@ float	incX = 0.0f,
 float rotbaul = 0;
 bool activabaul = false, upbaul;
 
+//Variables para la animación del tocador
+float movetoc1 = 0, movetoc2 = 0, movetoc3 = 0, rottoc = 0;
+bool movetoc = false;
+
 
 #define MAX_FRAMES 9
 int i_max_steps = 60;
@@ -200,6 +204,25 @@ void animate(void)
 	else {
 		if (rotbaul > 0)
 			rotbaul -= 2;
+	}
+	//tocADOR
+	//Animación de tocador
+	if (movetoc) {
+		if (movetoc3 < 0.8) {
+			movetoc1 += 0.01;
+			movetoc2 += 0.02;
+			movetoc3 += 0.03;
+
+		}
+
+	}
+	else {
+		if (movetoc3 > 0) {
+			movetoc1 -= 0.01;
+			movetoc2 -= 0.02;
+			movetoc3 -= 0.03;
+
+		}
 	}
 	//Vehículo
 
@@ -406,7 +429,11 @@ int main()
 	//Tren - Animación
 	Model Tren("resources/Casa/Adaptados/Tren/Tren.obj");
 	Model tapa("resources/tapa baul/tapa.obj");
-
+	//Tocador
+	Model tocador("resources/lamparacorazon/tocador.obj");
+	Model toc1("resources/lamparacorazon/cajon1.obj");
+	Model toc2("resources/lamparacorazon/cajon2.obj");
+	Model toc3("resources/lamparacorazon/cajon3.obj");
 
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
 	animacionPersonaje.initShaders(animShader.ID);
@@ -621,6 +648,35 @@ int main()
 		Tren.Draw(staticShader);
 
 
+		//**Tocador
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, 13.1f));
+		model = glm::scale(model, glm::vec3(0.65f));
+		model = glm::rotate(model, glm::radians(-rottoc), glm::vec3(0.f, 1.f, 0.f));
+		staticShader.setMat4("model", model);
+		tocador.Draw(staticShader);
+		//cajon1
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(1.0f, 0.0f, 13.1f - movetoc1));
+		model = glm::scale(model, glm::vec3(0.65f));
+		model = glm::rotate(model, glm::radians(-rottoc), glm::vec3(0.f, 1.f, 0.f));
+		staticShader.setMat4("model", model);
+		toc1.Draw(staticShader);
+		//cajon2
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(1.f, 0.0f, 13.1f - movetoc2));
+		model = glm::scale(model, glm::vec3(0.65f));
+		model = glm::rotate(model, glm::radians(-rottoc), glm::vec3(0.f, 1.f, 0.f));
+		staticShader.setMat4("model", model);
+		toc2.Draw(staticShader);
+		//cajon3**
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(1.f, 0.0f, 13.1f - movetoc3));
+		model = glm::scale(model, glm::vec3(0.65f));
+		model = glm::rotate(model, glm::radians(-rottoc), glm::vec3(0.f, 1.f, 0.f));
+		staticShader.setMat4("model", model);
+		toc3.Draw(staticShader);
+
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Carro
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -762,6 +818,11 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		activabaul = true;
 	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
 		activabaul = false;
+	//Tocador
+	if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
+		movetoc = true;
+	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS)
+		movetoc = false;
 	//To Configure Model
 	//if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
 	//	posZ++;
