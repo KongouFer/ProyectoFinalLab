@@ -2,9 +2,11 @@
 /* ------------Proyecto Final - Laboratorio de Computación Gráfica -----------*/
 /*------------- 2023-1 -------------------------------------------------------*/
 /*------------- Alumno: Fernández Quiroz Félix Fernando ----------------------*/
+/*------------- Alumno: Perez Uribe Angela Andrea-----------------------------*/
 /*------------- No. Cuenta: 315192205 ----------------------------------------*/
-#include <Windows.h>
+/*------------- No. Cuenta: 316133159 ----------------------------------------*/
 
+#include <Windows.h>
 #include <glad/glad.h>
 #include <glfw3.h>	//main
 #include <stdlib.h>		
