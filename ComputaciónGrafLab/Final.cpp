@@ -63,8 +63,8 @@ double	deltaTime = 0.0f,
 		lastFrame = 0.0f;
 
 //Lighting
-glm::vec3 lightPosition(0.0f, 4.0f, -10.0f);
-glm::vec3 lightDirection(-1.0f, -1.0f, 1.0f);
+glm::vec3 lightPosition(0.0f, 0.0f, 0.0f);
+glm::vec3 lightDirection(-4.0f, -4.0f, -4.0f);
 
 // posiciones
 //float x = 0.0f;
@@ -96,6 +96,10 @@ float	incX = 0.0f,
 		incZ = 0.0f,
 		rotInc = 0.0f,
 		giroMonitoInc = 0.0f;
+
+float rotbaul = 0;
+bool activabaul = false, upbaul;
+
 
 #define MAX_FRAMES 9
 int i_max_steps = 60;
@@ -188,7 +192,15 @@ void animate(void)
 			i_curr_steps++;
 		}
 	}
-
+	//baul
+	if (activabaul) {
+		if (rotbaul < 90)
+			rotbaul += 4;
+	}
+	else {
+		if (rotbaul > 0)
+			rotbaul -= 2;
+	}
 	//Vehículo
 
 		if (circuito)
@@ -393,7 +405,7 @@ int main()
 	Model Puerta_8("resources/Fachada final/Puerta_8.obj");
 	//Tren - Animación
 	Model Tren("resources/Casa/Adaptados/Tren/Tren.obj");
-
+	Model tapa("resources/tapa baul/tapa.obj");
 
 
 	ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
@@ -486,7 +498,13 @@ int main()
 		glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
 		glm::vec3 ambientColor = diffuseColor * glm::vec3(0.75f);
 		
-
+		//baul
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(3.4f, 2.0f, 21.5f));
+		model = glm::rotate(model, glm::radians(-rotbaul), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(2.3f, 1.2f, 2.2f));
+		staticShader.setMat4("model", model);
+		tapa.Draw(staticShader);
 		//// -------------------------------------------------------------------------------------------------------------------------
 		//// Personaje Animacion
 		//// -------------------------------------------------------------------------------------------------------------------------
@@ -740,6 +758,10 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		camera.ProcessKeyboard(LEFT, (float)deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, (float)deltaTime);
+	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+		activabaul = true;
+	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
+		activabaul = false;
 	//To Configure Model
 	//if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
 	//	posZ++;
