@@ -1,12 +1,1 @@
-﻿  Final.cpp
-C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\ComputaciónGrafLab\include\shader_m.h(44,40): warning C4101: 'e': variable local sin referencia
-C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\ComputaciónGrafLab\include\modelAnim.h(104,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\ComputaciónGrafLab\include\modelAnim.h(520,24): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\ComputaciónGrafLab\Final.cpp(751,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\ComputaciónGrafLab\Final.cpp(752,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\ComputaciónGrafLab\Final.cpp(756,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\ComputaciónGrafLab\Final.cpp(757,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\ComputaciónGrafLab\Final.cpp(759,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\ComputaciónGrafLab\Final.cpp(760,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\ComputaciónGrafLab\Final.cpp(768,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  ComputaciónGrafLab.vcxproj -> C:\Users\Felix\OneDrive\Documentos\GitHub\ProyectoFinalLab\Debug\ComputaciónGrafLab.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Platform.targets(67,5): error MSB8020: No se pueden encontrar las herramientas de compilación para v143 (Conjunto de herramientas de la plataforma = 'v143'). Para compilar con las herramientas de compilación v143, instale las herramientas de compilación v143. También puede actualizar a las herramientas actuales de Visual Studio. Para ello, seleccione el menú Proyecto o haga clic con el botón secundario en la solución y, a continuación, seleccione "Actualizar solución".
