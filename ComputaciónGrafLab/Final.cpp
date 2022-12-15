@@ -378,8 +378,18 @@ int main()
 
 	//Model Asador("resources/Casa/Asador/Asador.obj");
 	
-	//Casa - Prueba
-	Model Prueba("resources/Pruebas/Casa_3/Casa_3.obj");
+	//Casa
+	Model Fachada("resources/Fachada final/Casa.obj");
+	//Puertas - Animación
+	Model Puerta_1("resources/Fachada final/Puerta_1.obj");
+	Model Puerta_2("resources/Fachada final/Puerta_2.obj");
+	Model Puerta_3("resources/Fachada final/Puerta_3.obj");
+	Model Puerta_4("resources/Fachada final/Puerta_4.obj");
+	Model Puerta_5("resources/Fachada final/Puerta_5.obj");
+	Model Puerta_6("resources/Fachada final/Puerta_6.obj");
+	Model Puerta_7("resources/Fachada final/Puerta_7.obj");
+	Model Puerta_8("resources/Fachada final/Puerta_8.obj");
+	//Tren - Animación
 	Model Tren("resources/Casa/Adaptados/Tren/Tren.obj");
 
 
@@ -528,7 +538,56 @@ int main()
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(5.0f));
 		staticShader.setMat4("model", model);
-		Prueba.Draw(staticShader);
+		Fachada.Draw(staticShader);
+
+		//Puertas
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_1.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_2.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_3.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_4.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_5.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_6.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_7.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_8.Draw(staticShader);
 		//Baul
 
 		//Tren
