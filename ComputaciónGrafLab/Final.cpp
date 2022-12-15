@@ -62,7 +62,7 @@ double	deltaTime = 0.0f,
 
 //Lighting
 glm::vec3 lightPosition(0.0f, 4.0f, -10.0f);
-glm::vec3 lightDirection(0.0f, -1.0f, -1.0f);
+glm::vec3 lightDirection(-1.0f, -1.0f, 1.0f);
 
 // posiciones
 //float x = 0.0f;
@@ -194,8 +194,8 @@ void animate(void)
 			if (recorrido1)
 			{
 				orienta = 180;
-				movAuto_x += 0.2f;
-				if (movAuto_x > 18.335)
+				movAuto_x += 0.1f;
+				if (movAuto_x > 3.710 * 5)
 				{
 					recorrido1 = false;
 					recorrido2 = true;
@@ -204,8 +204,8 @@ void animate(void)
 			if (recorrido2)
 			{
 				orienta = 90;
-				movAuto_z += 0.2f;
-				if (movAuto_z > 8.847*5)
+				movAuto_z += 0.1f;
+				if (movAuto_z > 8.971*5)
 				{
 					recorrido2 = false;
 					recorrido3 = true;
@@ -216,8 +216,8 @@ void animate(void)
 			if (recorrido3)
 			{
 				orienta = 0;
-				movAuto_x -= 0.2f;
-				if (movAuto_x < 1.926*5)
+				movAuto_x -= 0.1f;
+				if (movAuto_x < 1.959*5)
 				{
 					recorrido3 = false;
 					recorrido4 = true;
@@ -227,8 +227,8 @@ void animate(void)
 			if (recorrido4)
 			{
 				orienta = 90;
-				movAuto_z += 0.2f;
-				if (movAuto_z > 10.884*5)
+				movAuto_z += 0.1f;
+				if (movAuto_z > 10.889*5)
 				{
 					recorrido4 = false;
 					recorrido5 = true;
@@ -238,8 +238,8 @@ void animate(void)
 			if (recorrido5)
 			{
 				orienta = 0;
-				movAuto_x -= 0.2f;
-				if (movAuto_x < 1.318*5)
+				movAuto_x -= 0.1f;
+				if (movAuto_x < 1.102*5)
 				{
 					recorrido5 = false;
 					recorrido6 = true;
@@ -249,8 +249,8 @@ void animate(void)
 			if (recorrido6)
 			{
 				orienta = 270;
-				movAuto_z -= 0.2f;
-				if (movAuto_z < 10.103*5) //Z = 8.2 Maya
+				movAuto_z -= 0.1f;
+				if (movAuto_z < 9.965*5) //Z = 8.2 Maya
 				{
 					recorrido6 = false;
 					recorrido7 = true;
@@ -259,8 +259,8 @@ void animate(void)
 			if (recorrido7)
 			{
 				orienta = 0;
-				movAuto_x -= 0.2f;
-				if (movAuto_x < 0.6 * 5) //Z = 8.2 Maya
+				movAuto_x -= 0.1f;
+				if (movAuto_x < 0.5 * 5) //Z = 8.2 Maya
 				{
 					recorrido7 = false;
 					recorrido8 = true;
@@ -269,13 +269,14 @@ void animate(void)
 			if (recorrido8)
 			{
 				orienta = 270;
-				movAuto_z -= 0.2f;
-				if (movAuto_z < 8.2 * 5) //Z = 8.2 Maya
+				movAuto_z -= 0.1f;
+				if (movAuto_z < 8.403 * 5) //Z = 8.2 Maya
 				{
 					recorrido8 = false;
 					recorrido1 = true;
 				}
 			}
+
 		}
 }
 
@@ -377,8 +378,18 @@ int main()
 
 	//Model Asador("resources/Casa/Asador/Asador.obj");
 	
-	//Casa - Prueba
-	Model Prueba("resources/Pruebas/Casa_1.obj");
+	//Casa
+	Model Fachada("resources/Fachada final/Casa.obj");
+	//Puertas - Animación
+	Model Puerta_1("resources/Fachada final/Puerta_1.obj");
+	Model Puerta_2("resources/Fachada final/Puerta_2.obj");
+	Model Puerta_3("resources/Fachada final/Puerta_3.obj");
+	Model Puerta_4("resources/Fachada final/Puerta_4.obj");
+	Model Puerta_5("resources/Fachada final/Puerta_5.obj");
+	Model Puerta_6("resources/Fachada final/Puerta_6.obj");
+	Model Puerta_7("resources/Fachada final/Puerta_7.obj");
+	Model Puerta_8("resources/Fachada final/Puerta_8.obj");
+	//Tren - Animación
 	Model Tren("resources/Casa/Adaptados/Tren/Tren.obj");
 
 
@@ -432,7 +443,7 @@ int main()
 		staticShader.setVec3("dirLight.specular", glm::vec3(0.0f, 0.0f, 0.0f));
 
 		staticShader.setVec3("pointLight[0].position", lightPosition);
-		staticShader.setVec3("pointLight[0].ambient", glm::vec3(0.0f, 0.0f, 0.0f));
+		staticShader.setVec3("pointLight[0].ambient", glm::vec3(1.0f, 1.0f, 1.0f));
 		staticShader.setVec3("pointLight[0].diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
 		staticShader.setVec3("pointLight[0].specular", glm::vec3(0.0f, 0.0f, 0.0f));
 		staticShader.setFloat("pointLight[0].constant", 0.08f);
@@ -527,7 +538,56 @@ int main()
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(5.0f));
 		staticShader.setMat4("model", model);
-		Prueba.Draw(staticShader);
+		Fachada.Draw(staticShader);
+
+		//Puertas
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_1.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_2.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_3.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_4.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_5.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_6.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_7.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		Puerta_8.Draw(staticShader);
 		//Baul
 
 		//Tren

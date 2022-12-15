@@ -299,7 +299,28 @@ Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 map_Kd Arbol_5.png
 Ni 1.00
+newmtl Sofa_2_lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ArmChair_lambert3SG1_Base_Color.png
+Ni 1.00
+newmtl Sofa_2_lambert2SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd ArmChair_lambert3SG1_Base_Color.png
+Ni 1.00
 newmtl Sofa_lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura.png
+Ni 1.00
+newmtl Sofa_lambert2SG1
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
